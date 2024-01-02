@@ -1,0 +1,17 @@
+{
+  "name": "fullstackbackhendapplication",
+  "version": "1.0.0",
+  "description": "full backhend application",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "javascript",
+    "backhend",
+    "mongodb"
+  ],
+  "author": "Haseeb",
+  "license": "ISC"
+}
