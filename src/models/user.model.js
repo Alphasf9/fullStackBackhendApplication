@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import jwt from 'jwt';
-import brcypt from 'brcypt';
+import bcrypt from 'bcrypt';
 
 const userSchema = new Schema({
     username: {
@@ -9,7 +9,7 @@ const userSchema = new Schema({
         unique: true,
         lowercase: true,
         trim: true,
-        index: true,  // searchable and get in databse searching
+        index: true,  // searchable and get in database searching
     },
 
     email: {
@@ -63,7 +63,7 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.methods.isPasswordCorrect = async function (password) {
-    return await brcypt.compare(password, this.password)// comapring password
+    return await brcypt.compare(password, this.password)// comparing password
 }
 
 userSchema.methods.generateAccessToken = function () {
@@ -72,7 +72,7 @@ userSchema.methods.generateAccessToken = function () {
             _id: this._id,  // kya kya information rakhe jaye
             email: this.email,
             username: this.username,
-            fullName: this.fullName   //this.fullName is coming from databse
+            fullName: this.fullName   //this.fullName is coming from database
         },
 
         process.env.ACCESS_TOKEN_SECRET,
