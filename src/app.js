@@ -17,4 +17,4 @@ app.use(express.urlencoded({ extended: true, limit: "20kb" })); // objects insid
 app.use(express.static("public"))  // pdf,image store for public asset
 
 app.use(cookieParser());
-export { app }
+export default app;
