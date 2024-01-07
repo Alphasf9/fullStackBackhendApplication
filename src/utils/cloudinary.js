@@ -4,7 +4,6 @@ import { v2 as cloudinary } from 'cloudinary' // as rename v2
 
 import fs from 'fs' //fs--> file system by default in nodejs
 
-import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -20,9 +19,11 @@ const uploadOnCloudinary = async (localFilePath) => {
         const response = await cloudinary.uploader.upload(localFilePath, { // print reposne
             resource_type: "auto"
         })
-        console.log(response);
+        console.log(response); // study this data
         // file has been uploaded successfully
-        console.log('file is uploaded successfully', response.url);
+        console.log('file is uploaded on Cloudinary successfully', response.url);
+        // fs.unlinkSync(localFilePath); // after succesffully upload file will be removed from cloudinary
+        fs.unlinkSync(localFilePath);
         return response
     } catch (error) {
         fs.unlinkSync(localFilePath) // remove the locally save temporary file as the operation got rejected

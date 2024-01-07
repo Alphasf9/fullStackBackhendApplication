@@ -3,6 +3,8 @@ import { ApiError } from "../utils/ApiError.js"
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
+import { upload } from "../middlewares/multer.middleware.js"
+
 
 
 const registerUser = asyncHandler(async (req, res) => {
@@ -20,7 +22,8 @@ const registerUser = asyncHandler(async (req, res) => {
 
     //1 User details from frontend
     const { fullName, email, username, password } = req.body;
-    console.log("email: " + " " + email);
+    // console.log(req.body) study it!!
+    // console.log("email: " + " " + email);
 
     //2 validation
 
@@ -36,17 +39,25 @@ const registerUser = asyncHandler(async (req, res) => {
     }
 
     //3 check if user is existing
-    const existedUser = User.findOne({
-        $or: [{ username }, { email }]   // first dicument will return
+    const existedUser = await User.findOne({
+        $or: [{ username }, { email }]   // first document will return
     })
 
     if (existedUser) {
         throw new ApiError(409, "User already exists");
     }
 
+    // console.log(req.files);
+
     //4,5 files handlaing
     const avatarLocalPath = req.files?.avatar[0]?.path;
-    const coverImageLocalPath = req.files?.coverImage[0]?.path
+    // console.log(req.files)
+    // const coverImageLocalPath = req.files?.coverImage[0]?.path
+
+    let coverImageLocalPath;
+    if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
+        coverImageLocalPath = req.files.coverImage[0].path;
+    }
 
     //6 files uplaod multer
     if (!avatarLocalPath) {

@@ -13,8 +13,8 @@ router.route('/register').post(
         },
 
         {
-            name: "coverimage",
-            maxCount: 1
+            name: "coverImage",
+            maxCount: 2
         }
     ]),
     registerUser);
