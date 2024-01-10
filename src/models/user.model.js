@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcrypt';  //hash your password
 
 const userSchema = new Schema({
     username: {
@@ -59,6 +59,7 @@ userSchema.pre("save", async function (next) {
         return next();
     }
     this.password = await bcrypt.hash(this.password, 10);
+    //(kya bcrypt karna hai,rounds number)
     next();
 });
 
@@ -85,9 +86,9 @@ userSchema.methods.generateRefreshToken = function () {
     return jwt.sign(
         {
             _id: this._id,
-            email: this.email,
-            username: this.username,
-            fullName: this.fullName
+            // email: this.email,
+            // username: this.username,
+            // fullName: this.fullName
         },
 
         process.env.REFRESH_TOKEN_SECRET,
