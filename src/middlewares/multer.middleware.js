@@ -2,7 +2,7 @@ import multer from 'multer'
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {    // cb--> callback
-        cb(null, './public/temp')
+        cb(null, './public/temp')// file wil be kept at this location
     },
 
     filename: function (req, file, cb) {

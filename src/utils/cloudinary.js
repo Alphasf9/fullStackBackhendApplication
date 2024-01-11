@@ -1,4 +1,4 @@
-// usable code fro any file,video or pdf anything
+// usable code for any file,video or pdf anything 
 
 import { v2 as cloudinary } from 'cloudinary' // as rename v2
 
@@ -18,7 +18,7 @@ const uploadOnCloudinary = async (localFilePath) => {
         //upload the file on cloudinary
         const response = await cloudinary.uploader.upload(localFilePath, { // print reposne
             resource_type: "auto"
-        })
+        });
         console.log(response); // study this data
         // file has been uploaded successfully
         console.log('file is uploaded on Cloudinary successfully', response.url);

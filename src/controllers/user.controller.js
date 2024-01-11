@@ -3,18 +3,16 @@ import { ApiError } from "../utils/ApiError.js"
 import { User } from "../models/user.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
 import { ApiResponse } from "../utils/ApiResponse.js"
-import { upload } from "../middlewares/multer.middleware.js"
 
 
-
+// below format is repeated
 const registerUser = asyncHandler(async (req, res) => {
     //steps to register user:-
     // get user details from frontend
     //validation(email is empty or not,correct format of email etc..)
     //check if user is already registered: username || email
-    //check for images
-    //check for avatar compulsory
-    //uplaod them to cloudinary,avatar
+    //check for images,check for avatar compulsory
+    //upload them to cloudinary,avatar
     //create user object for - create entry in db
     //remove password and refresh token field from response
     //check if response or check for user creation
@@ -32,7 +30,7 @@ const registerUser = asyncHandler(async (req, res) => {
     // }
 
     if (
-        [fullName, email, username, password].some((field) =>
+        [fullName, email, username, password].some((field) =>  // The .some() method is used on the array. It checks whether at least one element in the array satisfies a given condition.
             field?.trim() === "")
     ) {
         throw new ApiError(400, "All fields are required")
@@ -67,7 +65,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const avatar = await uploadOnCloudinary(avatarLocalPath)
     const coverImage = await uploadOnCloudinary(coverImageLocalPath)
 
-
+    // double checking if avatar is not being uploaded
     if (!avatar) {
         throw new ApiError(400, "Avatar is not available");
     }
@@ -90,7 +88,7 @@ const registerUser = asyncHandler(async (req, res) => {
 
     // user properly created
     if (!createdUser) {
-        throw new ApiError(500, "Something went wrong while registenring user");
+        throw new ApiError(500, "Something went wrong while registering user");
     }
 
     return res.status(201).json(
