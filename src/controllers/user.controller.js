@@ -20,6 +20,14 @@ const registerUser = asyncHandler(async (req, res) => {
 
     //1 User details from frontend
     const { fullName, email, username, password } = req.body;
+    /*
+    const { fullName, email, username, password } = req.body;
+    The above line is equivalent to
+    const fullName = req.body.fullName;
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    */
     // console.log(req.body) study it!!
     // console.log("email: " + " " + email);
 
@@ -55,7 +63,9 @@ const registerUser = asyncHandler(async (req, res) => {
     let coverImageLocalPath;
     if (req.files && Array.isArray(req.files.coverImage) && req.files.coverImage.length > 0) {
         coverImageLocalPath = req.files.coverImage[0].path;
-    } 
+    }
+
+    // console.log("This is avatar local file path", avatarLocalPath);
 
     //6 files uplaod multer
     if (!avatarLocalPath) {
