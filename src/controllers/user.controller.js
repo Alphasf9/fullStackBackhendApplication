@@ -128,6 +128,7 @@ password check
 access and refresh token
 send cookie
 */
+
 const loginUser = asyncHandler(async (req, res) => {
     const { username, password, email } = req.body
 
@@ -194,15 +195,16 @@ const logoutUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         secure: true
     }
+
+    return res
+        .status(200)
+        .clearCookie("accessToken", options)
+        .clearCookie("refreshToken", options)
+        .json(new ApiResponse(
+            200, {}, "User logged out successfully"
+        ))
 })
 
-return res
-    .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(new ApiResponse(
-        200, {}, "User logged out successfully"
-    ))
 
 export {
     registerUser,

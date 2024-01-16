@@ -22,7 +22,7 @@ router.route('/register').post(
 
 router.route("/login").post(loginUser);
 
-// secuured routes
+// secured routes
 
 router.route("/logout").post(verifyJWT, logoutUser);
 
