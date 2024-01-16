@@ -1,9 +1,8 @@
 // This middleware will verify if user is there or not
 
-import { User } from "../models/user.model";
-import { asyncHandler } from "../utils/asyncHandler";
+import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
-import { User } from "../models/user.model";
+import { User } from "../models/user.model.js";
 
 export const verifyJWT = asyncHandler(async (req, _, next) => {
     try {
