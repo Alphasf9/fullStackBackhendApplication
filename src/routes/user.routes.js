@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { registerUser, loginUser, logoutUser, refreshAccessToken, changeCurrentPassword, getCurrentUser, updateAccountDetails, updateUserAvatar, updateUserCoverImage, getUserChannelProfile, getWatchHistory } from '../controllers/user.controller.js';
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
+import { getAllVideos } from '../controllers/video.controller.js';
 const router = Router();
 
 // avtar or file handling
